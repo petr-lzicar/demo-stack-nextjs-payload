@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: payload
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+#  payload:
+#    build: ./payload
+#    ports:
+#      - "3001:3000"
+#    environment:
+#      - PAYLOAD_SECRET=supersecret
+#      - DATABASE_URL=postgresql://postgres:postgres@db:5432/payload
+#    depends_on:
+#      - db
+#    volumes:
+#      - ./payload:/app
+#    command: npm run dev
+#
+#  nextjs:
+#    build: ./nextjs
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      - NEXT_PUBLIC_API_URL=http://localhost:3001/api
+#    depends_on:
+#      - payload
+#    volumes:
+#      - ./nextjs:/app
+#    command: npm run dev
+
+volumes:
+  pgdata:
